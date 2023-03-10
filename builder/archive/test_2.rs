@@ -14,6 +14,7 @@ pub fn derive(input: TokenStream) -> TokenStream {
     }
 }
 
+// StructFields is one of the punctuated sequences: https://docs.rs/syn/1.0.109/syn/punctuated/index.html
 type StructFields = syn::punctuated::Punctuated<syn::Field, syn::Token!(,)>;
 
 fn get_fields_from_derive_input(d: &syn::DeriveInput) -> syn::Result<&StructFields> {

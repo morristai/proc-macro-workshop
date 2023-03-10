@@ -45,11 +45,12 @@ fn generate_builder_struct_factory_init_clauses(fields: &StructFields) -> syn::R
     Ok(init_clauses)
 }
 
+// for test 3
 fn generate_setter_functions(fields: &StructFields) -> syn::Result<proc_macro2::TokenStream> {
     let idents: Vec<_> = fields.iter().map(|f| { &f.ident }).collect();
     let types: Vec<_> = fields.iter().map(|f| { &f.ty }).collect();
 
-    // 创建一个空的TokenStream
+    // Create an empty TokenStream
     let mut final_tokenstream = proc_macro2::TokenStream::new();
 
     for (ident, type_) in idents.iter().zip(types.iter()) {
@@ -59,7 +60,7 @@ fn generate_setter_functions(fields: &StructFields) -> syn::Result<proc_macro2::
                 self
             }
         };
-        // 不断追加新的TokenStream片段到一个公共的TokenStream上
+        // Always add new TokenStream fragments to a public TokenStream
         final_tokenstream.extend(tokenstream_piece);
     }
 
@@ -77,7 +78,7 @@ fn do_expand(st: &syn::DeriveInput) -> syn::Result<proc_macro2::TokenStream> {
     let builder_struct_fields_def = generate_builder_struct_fields_def(fields)?;
     let builder_struct_factory_init_clauses = generate_builder_struct_factory_init_clauses(fields)?;
 
-    // 下面这一行是第三关新加的
+    // for test 3
     let setter_functions = generate_setter_functions(fields)?;
 
     let ret = quote! {
@@ -92,7 +93,7 @@ fn do_expand(st: &syn::DeriveInput) -> syn::Result<proc_macro2::TokenStream> {
             }
         }
 
-        // 下面这三行是第三关新加的
+        // for test 3
         impl #builder_name_ident {
             #setter_functions
         }
