@@ -1,0 +1,3 @@
+[submodule "submodules/rust-learnings"]
+	path = submodules/rust-learnings
+	url = https://github.com/WhoisDavid/rust-learnings.git
